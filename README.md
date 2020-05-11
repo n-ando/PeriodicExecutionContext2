@@ -26,7 +26,7 @@ $ cp PeriodicExecutionContext2.so <path to the RTC>
 
 ## Edit the "rtc.conf" for the RTC
 
-Please add the following lines.
+Please add the following lines to the rtc.conf.
 
 ```config:rtc.conf
 manager.modules.load_path: ./
