@@ -151,14 +151,12 @@ namespace RTC
 	    m_worker.cond_.wait();
 	  }
         coil::TimeValue t0(coil::gettimeofday());
-	RTC_PARANOID(("t0 = %f", (double)t0));
 	if (m_worker.running_)
 	  {
 	    std::for_each(m_comps.begin(), m_comps.end(), invoke_worker());
 	  }
 	m_worker.mutex_.unlock();
         coil::TimeValue t1(coil::gettimeofday());
-	RTC_PARANOID(("t1 = %f", (double)t1));
 	if (count > 1000)
           {
             RTC_PARANOID(("Period:    %f [s]", (double)m_period));
@@ -167,20 +165,14 @@ namespace RTC
           }
 	if ((double)t1 - t0 < 0.0)
 	  {
-	    RTC_PARANOID(("### Clock rewinding detected"));
+	    RTC_PARANOID(("Clock rewinding detected"));
 	  }
         coil::TimeValue t2(coil::gettimeofday());
-	RTC_PARANOID(("t2 = %f", (double)t2));
-        if (!m_nowait && t1 - t0 > 0 && m_period > (t1 - t0))
+        if (!m_nowait && (double)(t1 - t0) > 0.0 && m_period > (t1 - t0))
           {
-	    RTC_PARANOID(("### Sleeping...."));
             if (count > 1000) { RTC_PARANOID(("sleeping...")); }
             coil::sleep((coil::TimeValue)(m_period - (t1 - t0)));
           }
-	else
-	  {
-	    RTC_PARANOID(("### Skip sleep"));
-	  }
         if (count > 1000)
           {
             coil::TimeValue t3(coil::gettimeofday());
