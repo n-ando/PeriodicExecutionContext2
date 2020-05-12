@@ -1,4 +1,4 @@
-# Bug fixed PeriodicExecutionContext ( for OpenRTM-aist-1.1.2)
+# Bug fixed PeriodicExecutionContext (for OpenRTM-aist-1.1.2)
 
 The default execution context has a bug that causes RTC to hang when rewinding the system clock.
 This PeriodicExecutionContext2 is the bugfix version of the execution context.
